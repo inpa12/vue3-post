@@ -4,7 +4,7 @@
         <hr class="my-4" />
         <form @submit.prevent="save">
             <div class="mb-3">
-                <label for="title" class="form-label">제목목</label>
+                <label for="title" class="form-label">제목</label>
                 <input v-model="form.title" type="text" class="form-control" id="title" />
             </div>
             <div class="mb-3">

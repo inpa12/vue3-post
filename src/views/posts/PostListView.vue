@@ -26,13 +26,20 @@ import AppCard from '@/components/posts/AppCard.vue'
 import { getPosts } from '@/api/posts'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
+const params = ref({
+    _sort: 'createdAt',
+    _order: 'desc',
+    //_page: 1,
+    //_limit: 6,
+    //title_like: '',
+})
 
 const router = useRouter()
 const posts = ref([])
 
 const fetchPosts = async () => {
     try {
-        const { data } = await getPosts()
+        const { data } = await getPosts(params.value)
         posts.value = data
     } catch (error) {
         console.error(error)
