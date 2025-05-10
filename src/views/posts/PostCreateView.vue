@@ -48,7 +48,7 @@ const save = () => {
         console.error(error)
     }
 
-    createPost(data)
+    //createPost(data)
 }
 const goListPage = () => router.push({ name: 'PostList' })
 </script>

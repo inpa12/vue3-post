@@ -40,7 +40,8 @@ const fetchPosts = async () => {
 }
 
 fetchPosts()
-const goPage = (id) => {
+
+function goPage(id) {
     // router.push(`/posts/${id}`);
     router.push({
         name: 'PostDetail',
