@@ -2,7 +2,7 @@
     <div>
         <h2>{{ post.title }}</h2>
         <p>{{ post.content }}</p>
-        <p class="text-muted"><p>{{ post.createdAt }}</p></p>
+        <p class="text-muted">{{ post.createdAt }}</p>
         <hr class="my-4" />
         <div class="row g-2">
             <div class="col-auto">
@@ -34,9 +34,9 @@ import { useRouter } from 'vue-router'
 import { getPostById, deletePost } from '@/api/posts'
 import { ref } from 'vue'
 
- const props = defineProps({
-     id: [String, Number]
- })
+const props = defineProps({
+    id: [String, Number],
+})
 
 const router = useRouter()
 const post = ref({})
@@ -48,7 +48,6 @@ const fetchPosts = async () => {
     } catch (error) {
         console.log(error)
     }
-
 }
 const setPost = ({ title, content, createdAt }) => {
     post.value.title = title
@@ -59,16 +58,16 @@ fetchPosts()
 const remove = async () => {
     try {
         if (confirm('삭제 하시겠습니까?') === false) {
-            return;
+            return
         }
-        await deletePost( props.id )
+        await deletePost(props.id)
         router.push({ name: 'PostList' })
     } catch (error) {
         console.error(error)
     }
 }
 const goListPage = () => router.push({ name: 'PostList' })
-const goEditPage = () => router.push({ name: 'PostEdit', params: { id:props.id } })
+const goEditPage = () => router.push({ name: 'PostEdit', params: { id: props.id } })
 </script>
 
 <style lang="scss" scoped></style>
