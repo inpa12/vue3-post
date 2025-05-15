@@ -48,13 +48,9 @@ import PostItem from '@/components/posts/PostItem.vue'
 import PostDetailView from '@/views/posts/PostDetailView.vue'
 import PostFilter from '@/components/posts/PostFilter.vue'
 import PostModal from '@/components/posts/PostModal.vue'
-import AppPagination from '@/components/AppPagination.vue'
-import AppCard from '@/components/AppCard.vue'
-import AppGrid from '@/components/AppGrid.vue'
 import { getPosts } from '@/api/posts'
 import { computed, ref, watchEffect } from 'vue'
 import { useRouter } from 'vue-router'
-import AppModalVue from '@/components/AppModal.vue'
 
 const params = ref({
     _sort: 'createdAt',
