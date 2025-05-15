@@ -73,18 +73,6 @@
       "createdAt": "2020-01-12"
     },
     {
-      "id": 13,
-      "title": "제목13",
-      "content": "내용13",
-      "createdAt": "2020-01-13"
-    },
-    {
-      "id": 14,
-      "title": "제목14s",
-      "content": "내용14",
-      "createdAt": "2020-01-14"
-    },
-    {
       "title": "제목15.",
       "content": "내용15.",
       "createdAt": "1747288031663",
@@ -119,6 +107,18 @@
       "content": "sodud",
       "createdAt": 1747288742869,
       "id": 23
+    },
+    {
+      "title": "sdfsdf",
+      "content": "sdfdaf",
+      "createdAt": 1747294883256,
+      "id": 24
+    },
+    {
+      "title": "sdsf",
+      "content": "asdfasdf",
+      "createdAt": 1747294915847,
+      "id": 25
     }
   ]
 }
