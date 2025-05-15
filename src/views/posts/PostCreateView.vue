@@ -2,7 +2,7 @@
   <div>
     <h2 @click="visibleForm = !visibleForm">게시글 등록</h2>
     <hr class="my-4" />
-    <AppError v-if="error" message="error.message" />
+    <AppError v-if="error" :message="error.message" />
     <PostForm
       v-if="visibleForm"
       v-model:title="form.title"
@@ -27,10 +27,9 @@
 <script setup>
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { createPost } from '@/api/posts'
 import PostForm from '@/components/posts/PostForm.vue'
 import { useAlert } from '@/composables/alert'
-import AppError from '@/components/app/AppError.vue'
+import { useAxios } from '@/hooks/useAxios'
 
 const { vAlert, vSuccess } = useAlert()
 
@@ -39,26 +38,42 @@ const form = ref({
   title: null,
   content: null,
 })
-const loading = ref(false)
-const error = ref(null)
-const save = async () => {
-  try {
-    loading.value = true
-    await createPost({
-      ...form.value,
-      createdAt: Date.now(),
-    })
-    router.push({ name: 'PostList' })
-    vSuccess('등록이 완료 되었습니다.')
-  } catch (err) {
-    vAlert(err.message)
-    error.value = err
-  } finally {
-    loading.value = false
-  }
 
-  //createPost(data)
+const { error, loading, execute } = useAxios(
+  '/posts',
+  {
+    methos: 'post',
+  },
+  {
+    immediate: false,
+    onSuccess: () => {
+      router.push({ name: 'PostList' })
+      vSuccess('등록이 완료 되었습니다.')
+    },
+    onError: (err) => {
+      vAlert(err.message)
+    },
+  },
+)
+const save = async () => {
+  execute({ ...form.value, createdAt: Date.now() })
 }
+// const save = async () => {
+//   try {
+//     loading.value = true
+//     await createPost({
+//       ...form.value,
+//       createdAt: Date.now(),
+//     })
+//     router.push({ name: 'PostList' })
+//     vSuccess('등록이 완료 되었습니다.')
+//   } catch (err) {
+//     vAlert(err.message)
+//     error.value = err
+//   } finally {
+//     loading.value = false
+//   }
+// }
 const goListPage = () => router.push({ name: 'PostList' })
 const visibleForm = ref(true)
 </script>

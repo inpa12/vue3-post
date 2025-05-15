@@ -8,7 +8,7 @@
     <p>{{ post.content }}</p>
     <p class="text-muted">{{ $dayjs(post.createdAt).format('YYYY-MM-DD HH:mm:ss') }}</p>
     <hr class="my-4" />
-    <AppError v-if="removeError" message="removeError.message" />
+    <AppError v-if="removeError" :message="removeError.message" />
     <div class="row g-2">
       <div class="col-auto">
         <button class="btn btn-outline-dark" @click="$router.push('/posts/10')">이전글</button>
@@ -38,60 +38,41 @@
 
 <script setup>
 import { useRouter } from 'vue-router'
-import { getPostById, deletePost } from '@/api/posts'
-import { ref } from 'vue'
 import { useAlert } from '@/composables/alert'
-import AppLoading from '@/components/app/AppLoading.vue'
-import AppError from '@/components/app/AppError.vue'
-
-const { vAlert } = useAlert()
+import { useAxios } from '@/hooks/useAxios'
 
 const props = defineProps({
   id: [String, Number],
 })
 
 const router = useRouter()
-const post = ref({})
+const { vAlert, vSuccess } = useAlert()
+const { error, loading, data: post } = useAxios(`/posts/${props.id}`)
 
-const error = ref(null)
-const loading = ref(false)
-
-const fetchPosts = async () => {
-  try {
-    loading.value = true
-    const { data } = await getPostById(props.id)
-    setPost(data)
-  } catch (err) {
-    error.value = err
-  } finally {
-    loading.value = false
-  }
-}
-
-const setPost = ({ title, content, createdAt }) => {
-  post.value.title = title
-  post.value.content = content
-  post.value.createdAt = createdAt
-}
-fetchPosts()
-
-const removeError = ref(null)
-const removeLoading = ref(false)
+const {
+  error: removeError,
+  loading: removeLoading,
+  execute,
+} = useAxios(
+  `/posts/${props.id}`,
+  { method: 'delete' },
+  {
+    immediate: false,
+    onSuccess: () => {
+      vSuccess('삭제가 완료되었습니다.')
+      router.push({ name: 'PostList' })
+    },
+    onError: (err) => {
+      vAlert(err.message)
+    },
+  },
+)
 
 const remove = async () => {
-  try {
-    if (confirm('삭제 하시겠습니까?') === false) {
-      return
-    }
-    removeLoading.value = true
-    await deletePost(props.id)
-    router.push({ name: 'PostList' })
-  } catch (err) {
-    vAlert(err.message)
-    removeError.value = err
-  } finally {
-    removeLoading.value = false
+  if (confirm('삭제 하시겠습니까?') === false) {
+    return
   }
+  execute()
 }
 const goListPage = () => router.push({ name: 'PostList' })
 const goEditPage = () => router.push({ name: 'PostEdit', params: { id: props.id } })
