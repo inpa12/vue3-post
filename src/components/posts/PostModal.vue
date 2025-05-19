@@ -13,7 +13,9 @@
       </div>
     </template>
     <template #actions>
-      <button type="button" class="btn btn-secondary" @click="closeModal">Close</button>
+      <button type="button" class="btn btn-secondary" @click="closeModal">
+        Close
+      </button>
     </template>
   </AppModal>
 </template>

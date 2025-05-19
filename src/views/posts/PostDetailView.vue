@@ -7,27 +7,42 @@
     <h2>{{ post.title }}</h2>
     <p>id: {{ props.id }}, isOdd: {{ isOdd }}</p>
     <p>{{ post.content }}</p>
-    <p class="text-muted">{{ $dayjs(post.createdAt).format('YYYY-MM-DD HH:mm:ss') }}</p>
+    <p class="text-muted">
+      {{ $dayjs(post.createdAt).format('YYYY-MM-DD HH:mm:ss') }}
+    </p>
     <hr class="my-4" />
     <AppError v-if="removeError" :message="removeError.message" />
     <div class="row g-2">
       <div class="col-auto">
-        <button class="btn btn-outline-dark" @click="$router.push('/posts/10')">이전글</button>
+        <button class="btn btn-outline-dark" @click="$router.push('/posts/10')">
+          이전글
+        </button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-dark" @click="$router.push('/posts/11')">다음글</button>
+        <button class="btn btn-outline-dark" @click="$router.push('/posts/11')">
+          다음글
+        </button>
       </div>
       <div class="col-auto me-auto"></div>
       <div class="col-auto">
         <button class="btn btn-outline-dark" @click="goListPage">목록</button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-primary" @click="goEditPage">수정</button>
+        <button class="btn btn-outline-primary" @click="goEditPage">
+          수정
+        </button>
       </div>
       <div class="col-auto">
-        <button class="btn btn-outline-danger" @click="remove" :disabled="removeLoading">
+        <button
+          class="btn btn-outline-danger"
+          @click="remove"
+          :disabled="removeLoading"
+        >
           <template v-if="removeLoading">
-            <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+            <span
+              class="spinner-grow spinner-grow-sm"
+              aria-hidden="true"
+            ></span>
             <span class="visually-hidden" role="status">Loading...</span>
           </template>
           <template v-else> 삭제 </template>
@@ -68,7 +83,7 @@ const {
       vSuccess('삭제가 완료되었습니다.')
       router.push({ name: 'PostList' })
     },
-    onError: (err) => {
+    onError: err => {
       vAlert(err.message)
     },
   },
@@ -81,7 +96,8 @@ const remove = async () => {
   execute()
 }
 const goListPage = () => router.push({ name: 'PostList' })
-const goEditPage = () => router.push({ name: 'PostEdit', params: { id: props.id } })
+const goEditPage = () =>
+  router.push({ name: 'PostEdit', params: { id: props.id } })
 
 onBeforeRouteUpdate(() => {
   console.log('onBeforeRouteUpdate')

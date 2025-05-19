@@ -14,11 +14,13 @@
     "db": "json-server --watch db.json --port 5000"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.1.7",
     "axios": "^1.9.0",
     "bootstrap": "^5.3.6",
     "bootstrap-icons": "^1.12.1",
     "dayjs": "^1.11.13",
     "pinia": "^3.0.2",
+    "tailwindcss": "^4.1.7",
     "vue": "^3.5.13",
     "vue-router": "^4.5.1"
   },

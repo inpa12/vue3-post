@@ -36,7 +36,7 @@
       <AppPagination
         :current-page="params._page"
         :page-count="pageCount"
-        @page="(page) => (params._page = page)"
+        @page="page => (params._page = page)"
       />
     </template>
 
@@ -70,7 +70,7 @@ import { useAxios } from '@/hooks/useAxios'
 const router = useRouter()
 
 const previewId = ref(null)
-const selectPreview = (id) => (previewId.value = id)
+const selectPreview = id => (previewId.value = id)
 
 const params = ref({
   _sort: 'createdAt',
@@ -79,7 +79,7 @@ const params = ref({
   _limit: 6,
   title_like: '',
 })
-const changeLimit = (value) => {
+const changeLimit = value => {
   params.value._limit = value
   params.value._page = 1
 }
@@ -87,7 +87,9 @@ const { response, data: posts, error, loading } = useAxios('/posts', { params })
 const isExist = computed(() => posts.value && posts.value.length > 0)
 // pagination
 const totalCount = computed(() => response.value.headers['x-total-count'])
-const pageCount = computed(() => Math.ceil(totalCount.value / params.value._limit))
+const pageCount = computed(() =>
+  Math.ceil(totalCount.value / params.value._limit),
+)
 
 function goPage(id) {
   // router.push(`/posts/${id}`);

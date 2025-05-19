@@ -23,7 +23,7 @@ export const useAxios = (url, config = {}, options = {}) => {
   }
 
   const { params } = config
-  const execute = (body) => {
+  const execute = body => {
     data.value = null
     error.value = null
     loading.value = true
@@ -33,14 +33,14 @@ export const useAxios = (url, config = {}, options = {}) => {
       params: unref(params),
       data: typeof body === 'object' ? body : {},
     })
-      .then((res) => {
+      .then(res => {
         response.value = res
         data.value = res.data
         if (onSuccess) {
           onSuccess(res)
         }
       })
-      .catch((err) => {
+      .catch(err => {
         error.value = err
         if (onError) {
           onError(err)

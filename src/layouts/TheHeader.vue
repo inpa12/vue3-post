@@ -17,23 +17,35 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto">
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" to="/">Home</router-link>
+              <router-link class="nav-link" active-class="active" to="/"
+                >Home</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" to="/about">About</router-link>
+              <router-link class="nav-link" active-class="active" to="/about"
+                >About</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" to="/posts">게시글</router-link>
+              <router-link class="nav-link" active-class="active" to="/posts"
+                >게시글</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" to="/nested">Nested</router-link>
+              <router-link class="nav-link" active-class="active" to="/nested"
+                >Nested</router-link
+              >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" active-class="active" to="/my">MyPage</router-link>
+              <router-link class="nav-link" active-class="active" to="/my"
+                >MyPage</router-link
+              >
             </li>
           </ul>
           <div class="d-flex">
-            <button class="btn btn-outline-light" type="button" @click="goPage">글쓰기</button>
+            <button class="btn btn-outline-light" type="button" @click="goPage">
+              글쓰기
+            </button>
           </div>
         </div>
       </div>

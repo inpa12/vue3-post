@@ -1,4 +1,4 @@
 function funcPlugins() {
-	console.log('funcPlugins');
+  console.log('funcPlugins')
 }
-export default funcPlugins;
+export default funcPlugins

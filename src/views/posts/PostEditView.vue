@@ -7,13 +7,26 @@
     <h2>게시글 수정</h2>
     <hr class="my-4" />
     <AppError v-if="editError" message="editError.message" />
-    <PostForm v-model:title="form.title" v-model:content="form.content" @submit.prevent="edit">
+    <PostForm
+      v-model:title="form.title"
+      v-model:content="form.content"
+      @submit.prevent="edit"
+    >
       <template #actions>
-        <button type="button" class="btn btn-outline-danger" @click="goDetailPage">취소</button>
+        <button
+          type="button"
+          class="btn btn-outline-danger"
+          @click="goDetailPage"
+        >
+          취소
+        </button>
 
         <button class="btn btn-primary" :disabled="editLoading">
           <template v-if="editLoading">
-            <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+            <span
+              class="spinner-grow spinner-grow-sm"
+              aria-hidden="true"
+            ></span>
             <span class="visually-hidden" role="status">Loading...</span>
           </template>
           <template v-else> 수정 </template>
@@ -50,7 +63,7 @@ const {
       vSuccess('수정이 완료되었습니다!')
       router.push({ name: 'PostDetail', params: { id } })
     },
-    onError: (err) => {
+    onError: err => {
       vAlert(err.message)
     },
   },

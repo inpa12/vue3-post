@@ -10,11 +10,16 @@
       @submit.prevent="save"
     >
       <template #actions>
-        <button type="button" class="btn btn-outline-dark" @click="goListPage">목록</button>
+        <button type="button" class="btn btn-outline-dark" @click="goListPage">
+          목록
+        </button>
 
         <button class="btn btn-primary" :disabled="loading">
           <template v-if="loading">
-            <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+            <span
+              class="spinner-grow spinner-grow-sm"
+              aria-hidden="true"
+            ></span>
             <span class="visually-hidden" role="status">Loading...</span>
           </template>
           <template v-else> 저장 </template>
@@ -50,7 +55,7 @@ const { error, loading, execute } = useAxios(
       router.push({ name: 'PostList' })
       vSuccess('등록이 완료 되었습니다.')
     },
-    onError: (err) => {
+    onError: err => {
       vAlert(err.message)
     },
   },

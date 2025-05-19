@@ -35,7 +35,9 @@ const props = defineProps({
 })
 defineEmits(['modal', 'preview'])
 const dayjs = inject('dayjs')
-const createdDate = computed(() => dayjs(props.createdAt).format('YYYY-MM-DD HH:mm:ss'))
+const createdDate = computed(() =>
+  dayjs(props.createdAt).format('YYYY-MM-DD HH:mm:ss'),
+)
 </script>
 
 <style lang="scss" scoped></style>
