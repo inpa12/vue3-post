@@ -10,72 +10,104 @@ import NestedView from '@/views/nested/NestedView.vue'
 import NestedOneView from '@/views/nested/NestedOneView.vue'
 import NestedTwoView from '@/views/nested/NestedTwoView.vue'
 import NestedHomeView from '@/views/nested/NestedHomeView.vue'
+import MyPage from '@/views/MyPage.vue'
 
 const routes = [
-    {
-        path: '/',
-        name: 'Home',
-        component: HomeView,
-    },
-    {
-        path: '/about',
-        name: 'About',
-        component: AboutView,
-    },
-    {
-        path: '/posts',
-        name: 'PostList',
-        component: PostListView,
-    },
-    {
-        path: '/posts/create',
-        name: 'PostCreate',
-        component: PostCreateView,
-    },
-    {
-        path: '/posts/:id',
-        name: 'PostDetail',
-        component: PostDetailView,
-        props: true,
-    },
-    {
-        path: '/posts/:id/edit',
-        name: 'PostEdit',
-        component: PostEditView,
-    },
-    {
-        path: '/:pathMatch(.*)*',
-        name: 'NotFound',
-        component: NotFoundView,
-    },
-    {
-        path: '/nested',
-        name: 'Nested',
-        component: NestedView,
-        children: [
-            {
-                path: '',
-                name: 'NestedHome',
-                component: NestedHomeView,
-            },
-            {
-                path: 'one',
-                name: 'NestedOne',
-                component: NestedOneView,
-            },
-            {
-                path: 'two',
-                name: 'NestedTwo',
-                component: NestedTwoView,
-            },
-        ],
-    },
+  {
+    path: '/',
+    name: 'Home',
+    component: HomeView,
+  },
+  {
+    path: '/about',
+    name: 'About',
+    component: AboutView,
+  },
+  {
+    path: '/posts',
+    name: 'PostList',
+    component: PostListView,
+  },
+  {
+    path: '/posts/create',
+    name: 'PostCreate',
+    component: PostCreateView,
+  },
+  {
+    path: '/posts/:id',
+    name: 'PostDetail',
+    component: PostDetailView,
+    props: true,
+  },
+  {
+    path: '/posts/:id/edit',
+    name: 'PostEdit',
+    component: PostEditView,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'NotFound',
+    component: NotFoundView,
+  },
+  {
+    path: '/nested',
+    name: 'Nested',
+    component: NestedView,
+    children: [
+      {
+        path: '',
+        name: 'NestedHome',
+        component: NestedHomeView,
+      },
+      {
+        path: 'one',
+        name: 'NestedOne',
+        component: NestedOneView,
+      },
+      {
+        path: 'two',
+        name: 'NestedTwo',
+        component: NestedTwoView,
+      },
+    ],
+  },
+  {
+    path: '/my',
+    name: 'MyPage',
+    component: MyPage,
+    beforeEnter: [removeQueryString],
+    // beforeEnter: (to, from) => {
+    //   // console.log('to:', to)
+    //   // console.log('from:', from)
+    //   // return { name: 'Home' }
+    //   if (Object.keys(to.query).length > 0) {
+    //     return { path: to.path, query: {} }
+    //   }
+    // },
+  },
 ]
 
+function removeQueryString(to) {
+  if (Object.keys(to.query).length > 0) {
+    return { path: to.path, query: {} }
+  }
+}
+
 const router = createRouter({
-    history: createWebHistory(),
-    // history: createWebHashHistory(),
-    routes,
+  history: createWebHistory(),
+  // history: createWebHashHistory(),
+  routes,
 })
+
+// router.beforeEach((to, from) => {
+//   console.log('to: ', to)
+//   console.log('from: ', from)
+//   if (to.name === 'MyPage') {
+//     // router.push({name: 'Home'})
+//     //return false
+//     //return { name: 'Home' }
+//     return '/posts'
+//   }
+// })
 
 export default router
